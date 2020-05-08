@@ -7,9 +7,11 @@ using UnityEngine;
 public class BuildingPlacement : MonoBehaviour
 {
     public Camera cam;
-    public bool isMoving = false;
+    bool isMoving = false;
     public Vector3 offset = new Vector3(0,1f,0);
     GameObject building;
+    public Material building_mat;   
+    public Material transBuilding_mat;
  
     void Update()
     {
@@ -19,7 +21,7 @@ public class BuildingPlacement : MonoBehaviour
         //DrawRay();
         if (isMoving)
         {
-            DrawRay();
+            //DrawRay();
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 50))
@@ -34,10 +36,11 @@ public class BuildingPlacement : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && isMoving)
         {
             isMoving = false;
-            building.GetComponent<Collider>().enabled = true;
+            building.GetComponent<BoxCollider>().enabled = true;
+            building.GetComponent<Renderer>().material = building_mat;
             building = null;
         }
-        //if the building is not moving and we press the left mouse button
+        //else if the building is not moving and we press the left mouse button
         //check if we hit a building and if we did set isMoving to true
         //also set the collider to false so our raycast doesn't interfere with it
         else if (Input.GetMouseButtonDown(0) && !isMoving)
@@ -49,7 +52,8 @@ public class BuildingPlacement : MonoBehaviour
                 if (hit.collider.tag == "Building")
                 {
                     building = hit.collider.gameObject;
-                    building.GetComponent<Collider>().enabled = false;
+                    building.GetComponent<BoxCollider>().enabled = false;
+                    building.GetComponent<Renderer>().material = transBuilding_mat;
                     isMoving = true;
                 }
             }

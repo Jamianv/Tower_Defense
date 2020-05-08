@@ -1,45 +1,45 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemySpawner : MonoBehaviour
 {
+    private float elapsed = 0.0f;
+    public float spawnRate = 2.0f;
+    public float spawnAmount = 1;
+    
     //Our Enemy spawner which asks for an enemy from our object pooler
-    //and spawns it if it is available
-    //ObjectPooler1 objectPooler;
-    // Start is called before the first frame update
-    void Start()
+    //and spawns it if it is available. Uses a spawn rate and amount to control
+    //how fast units spawn and how many at a time.
+    private void Start()
     {
-        
+       elapsed = 0.0f;
     }
-
     void Update()
     {
-        //Enemies are just being spawned through the mouse button know
-        //todo: need to edit enemy spawning to be triggered at certain times
-        //and release a specific amount of enemies
-        if (Input.GetKeyDown("e"))
+        Spawn();
+    }
+    void Spawn()
+    {
+        elapsed += Time.deltaTime;
+        if (elapsed > spawnRate)
         {
-            GameObject enemy = ObjectPooler1.sharedInstance.GetPooledObject("Enemy");
-            if (enemy != null)
+            elapsed -= spawnRate;
+            for (int i = 0; i < spawnAmount; i++)
             {
-                Debug.Log("enemy != null");
-                enemy.transform.position = transform.position;
-                enemy.transform.rotation = Quaternion.identity;
-                enemy.SetActive(true);
+                GameObject enemy = ObjectPooler1.sharedInstance.GetPooledObject("Enemy");
+                if (enemy != null)
+                {
+                    //Debug.Log("enemy != null");
+                    enemy.transform.position = transform.position;
+                    enemy.transform.rotation = Quaternion.identity;
+                    enemy.SetActive(true);
 
+                }
             }
         }
-        //StartCoroutine(spawn());
     }
-
-    IEnumerator spawn()
-    {
-        
-        
-        yield return new WaitForSecondsRealtime(5);
-
-    }
-
     
+
 }

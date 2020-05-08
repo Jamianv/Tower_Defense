@@ -10,7 +10,9 @@ public class OnEnemyEnter : MonoBehaviour
     {
         if(other.tag == "Enemy")
         {
+            other.gameObject.SendMessage("SetHealth", 50);
             other.gameObject.SetActive(false);
+            
         }
     }
 }
