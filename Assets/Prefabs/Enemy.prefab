@@ -133,3 +133,5 @@ MonoBehaviour:
   target: {fileID: 1591746128394101823, guid: 350f664c1d3b1ea4a89f5970f680dd27, type: 3}
   agent: {fileID: 2953390809575071776}
   health: 50
+  damagePopup: {fileID: 6053460659436510861, guid: 97f247afc11611647b5571e5ca2220b3,
+    type: 3}

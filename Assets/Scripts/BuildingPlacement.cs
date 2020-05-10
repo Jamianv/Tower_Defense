@@ -18,15 +18,12 @@ public class BuildingPlacement : MonoBehaviour
         //this is how we move the building
         //Check if is moving is true if it is do a raycast and set the buildings
         //position = to hit.point + offset
-        //DrawRay();
         if (isMoving)
         {
-            //DrawRay();
             Ray ray = cam.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 50))
-            {
-                //pos = hit.point;
+            {                
                 building.gameObject.transform.position = hit.point + offset;
             }
         }

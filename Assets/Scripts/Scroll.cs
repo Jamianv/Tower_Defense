@@ -14,13 +14,12 @@ public class Scroll : MonoBehaviour
     void Start()
     {
         rend = GetComponent<Renderer>();
-        
     }
 
     // Update is called once per frame
     void Update()
     {
-        scrollPosition -= speed;
+        scrollPosition -= speed * Time.deltaTime;
         rend.material.SetFloat("_ScrollPosition", scrollPosition);
     }
 }

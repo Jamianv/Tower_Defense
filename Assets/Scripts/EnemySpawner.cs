@@ -35,11 +35,8 @@ public class EnemySpawner : MonoBehaviour
                     enemy.transform.position = transform.position;
                     enemy.transform.rotation = Quaternion.identity;
                     enemy.SetActive(true);
-
                 }
             }
         }
     }
-    
-
 }

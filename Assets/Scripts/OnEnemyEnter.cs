@@ -12,7 +12,6 @@ public class OnEnemyEnter : MonoBehaviour
         {
             other.gameObject.SendMessage("SetHealth", 50);
             other.gameObject.SetActive(false);
-            
         }
     }
 }
